@@ -7,15 +7,13 @@ import copy
 # import all loaders
 from . import loaders
 
+
 class Data:
-    def __init__(self, path=os.getcwd(), data_dir=None, loader=None, **kwargs):
-        self.path = path
+    """ Create a data interface for the data in 'path' """
+    def __init__(self, path=os.getcwd(), loader=None, **kwargs):
         self.code, self.loader = loaders.get_loader(path, loader, **kwargs)
-        if data_dir is not None:
-            self.loader.set_data_dir(data_dir)
         self.loader.scout()
         self.fluids = self.loader.fluids
-        self.vectors = self.loader.vectors
         self.particlegroups = self.loader.particlegroups
         self.planets = self.loader.planets
         self.parameters = self.loader.parameters
